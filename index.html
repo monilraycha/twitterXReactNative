@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <meta property="article:author" content="https://www.linkedin.com/in/erangadulshan">
+    <meta property="og:title" content="X-OAuth 2.0 - React Native">
+    <meta property="og:description" content="X-OAuth 2.0 - React Native">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/17006912?v=4">
+    <title>Social Login React Native</title>
+  </head>
+
+<body>
+    <header>
+        <div class="inner">
+            <h1>React Native X Login</h1>
+            <h2>Redirecting to your deep link...</h2>
+        </div>
+    </header>
+
+    <script type="text/javascript">
+      function parse_query_string(query) {
+        var vars = query.split("&");
+        var query_string = {};
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          var key = decodeURIComponent(pair[0]);
+          var value = decodeURIComponent(pair[1]);
+          if (typeof query_string[key] === "undefined") {
+            query_string[key] = decodeURIComponent(value);
+          } else if (typeof query_string[key] === "string") {
+            var arr = [query_string[key], decodeURIComponent(value)];
+            query_string[key] = arr;
+          } else {
+            query_string[key].push(decodeURIComponent(value));
+          }
+        }
+        return query_string;
+      }
+
+      var query = window.location.search.substring(1);
+      var qs = parse_query_string(query);
+      if (qs.redirect_url) {
+        var link = qs.redirect_url + '?code=' + qs.code + '&state=' + qs.state;
+        var buttonRedirect = document.createElement('a');
+        buttonRedirect.setAttribute('id', 'redirect');
+        buttonRedirect.setAttribute('href', link);
+        buttonRedirect.innerText = "Click here to navigate back to the app.";
+        document.body.appendChild(buttonRedirect);
+      } else {
+        alert("'redirect_url' query string param is missing.");
+      }
+    </script>
+</body>
+</html>
